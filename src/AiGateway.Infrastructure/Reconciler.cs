@@ -31,7 +31,7 @@ public class Reconciler(IServiceScopeFactory scopes, ILogger<Reconciler> log) : 
             .ExecuteUpdateAsync(s => s.SetProperty(r => r.State, ReservationState.ReviewRequired));
 
         var garbage = await db.Uploads.AsNoTracking().Where(u =>
-            (u.State == "available" && u.ExpiresAt < now) || (u.State == "claimed" && u.CreatedAt < now.AddHours(-1))).Take(500).ToListAsync();
+            (u.State == "available" && u.ExpiresAt < now) || (u.State == "claimed" && u.CreatedAt < now.AddHours(-1))).OrderBy(u => u.Id).Take(500).ToListAsync();
         foreach (var u in garbage)
         {
             await storage.DeleteAsync(u.ObjectKey, CancellationToken.None);
