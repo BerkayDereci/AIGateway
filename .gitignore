@@ -1,0 +1,10 @@
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.env
+.DS_Store
+keyring/
+TestResults/
+.claude/launch.json

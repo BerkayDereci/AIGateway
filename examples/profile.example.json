@@ -1,0 +1,20 @@
+{
+  "name": "workout-extraction",
+  "revision": 1,
+  "requiredCapabilities": [
+    "text",
+    "image",
+    "jsonSchema"
+  ],
+  "primary": {
+    "provider": "openai",
+    "model": "CONFIGURE_VERIFIED_MODEL_ID",
+    "connectionId": "CONFIGURE_CONNECTION_UUID"
+  },
+  "fallbacks": [],
+  "outputTokenLimit": 3000,
+  "timeoutSeconds": 120,
+  "schemaMode": "native",
+  "pricingRequiredForBudgetEnforcement": true,
+  "automaticRetryCount": 0
+}

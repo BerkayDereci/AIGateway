@@ -1,0 +1,2902 @@
+{
+    "openapi": "3.1.1",
+    "info": {
+        "title": "AiGateway.Api | v1",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:5080/"
+        }
+    ],
+    "paths": {
+        "/health/live": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/health/ready": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/meta": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfbooleanAndstringAndString[]"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/csrf": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfstring"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndListOfAnonymousTypeOfGuidAndstringAndstringAndstring"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndstringAndstring"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NameBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/members": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndstring"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MemberBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/members/{userId}": {
+            "patch": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RoleBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstring"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/projects": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "cursor",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                                "integer",
+                                "string"
+                            ],
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NameBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/projects/{projectId}": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectPatch"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/projects/{projectId}/environments": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GatewayEnvironment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/provider-connections": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConnectionBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/provider-connections/{connectionId}": {
+            "patch": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "connectionId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConnectionPatch"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "connectionId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/provider-connections/{connectionId}/verify": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "connectionId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/environments/{environmentId}/keys": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/KeyBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/environments/{environmentId}/keys/{keyId}": {
+            "delete": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "keyId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/profiles": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndDateTimeAndIEnumerableOfAnonymousTypeOfGuidAndintAndDateTimeAndProfileConfigAndIEnumerableOfAnonymousTypeOfGuidAndGuid"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NameBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/profiles/{profileId}/revisions": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "profileId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RevisionBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/environments/{environmentId}/profiles/{profileId}": {
+            "put": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "profileId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BindingBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfGuidAndGuidAndGuid"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/limits": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfstringAndListOfLimitAndListOfBudgetBucketAndint"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LimitBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Limit"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/usage": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "projectId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "cursor",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                                "integer",
+                                "string"
+                            ],
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfIEnumerableOfAnonymousTypeOfGuidAndDateTimeAndstringAndstringAndstringAndstringAndintAndstringAndGuidAndstringAndintAndintAndintAnddecimalAndstringAndstringAndAnonymousTypeOfintAndintAnddecimalAndintAndint"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/requests/{requestId}": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "requestId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndDateTimeAndDateTimeAndintAndstringAndstringAndstringAndstringAndstringAndGuidAndGuidAndGuidAndbooleanAndAnonymousTypeOfdecimalAndstringAndIEnumerableOfAnonymousTypeOfintAndstringAndstringAndstringAndstringAndintAndintAndintAndstringAnddecimalAndstringAndGuidAndstringAndDateTimeAndDateTimeAndint"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/models": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnonymousTypeOfstringAndstringAndbooleanAndbooleanAndbooleanAndbooleanAndstringAndDateTimeAndboolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/pricing": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PriceVersion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PriceBody"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/audit": {
+            "get": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "cursor",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                                "integer",
+                                "string"
+                            ],
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/uploads": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/uploads/{assetId}": {
+            "delete": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "assetId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/generations": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/environments/{environmentId}/uploads": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/workspaces/{workspaceId}/environments/{environmentId}/generations": {
+            "post": {
+                "tags": [
+                    "AiGateway.Api"
+                ],
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    },
+                    {
+                        "name": "environmentId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AnonymousTypeOfbooleanAndstringAndString[]": {
+                "required": [
+                    "demo",
+                    "environment",
+                    "providers"
+                ],
+                "type": "object",
+                "properties": {
+                    "demo": {
+                        "type": "boolean"
+                    },
+                    "environment": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "providers": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfdecimalAndstring": {
+                "required": [
+                    "amount",
+                    "state"
+                ],
+                "type": "object",
+                "properties": {
+                    "amount": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "state": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndDateTimeAndstringAndstringAndstringAndstringAndintAndstringAndGuidAndstringAndintAndintAndintAnddecimalAndstring": {
+                "required": [
+                    "requestId",
+                    "createdAt",
+                    "status",
+                    "feature",
+                    "provider",
+                    "model",
+                    "durationMs",
+                    "errorCode",
+                    "projectId",
+                    "endUserRef",
+                    "attempts",
+                    "inputTokens",
+                    "outputTokens",
+                    "estimatedCost",
+                    "costState"
+                ],
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "feature": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "provider": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "model": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "durationMs": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "errorCode": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "endUserRef": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "attempts": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "inputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "outputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "estimatedCost": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "costState": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndGuid": {
+                "required": [
+                    "environmentId",
+                    "revisionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "environmentId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "revisionId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndGuidAndGuid": {
+                "required": [
+                    "environmentId",
+                    "profileId",
+                    "revisionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "environmentId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "profileId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "revisionId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndintAndDateTimeAndProfileConfig": {
+                "required": [
+                    "id",
+                    "number",
+                    "createdAt",
+                    "config"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "number": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "config": {
+                        "$ref": "#/components/schemas/ProfileConfig"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstring": {
+                "required": [
+                    "userId",
+                    "role"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "role": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstringAndDateTimeAndDateTimeAndintAndstringAndstringAndstringAndstringAndstringAndGuidAndGuidAndGuidAndbooleanAndAnonymousTypeOfdecimalAndstringAndIEnumerableOfAnonymousTypeOfintAndstringAndstringAndstringAndstringAndintAndintAndintAndstringAnddecimalAndstringAndGuidAndstringAndDateTimeAndDateTimeAndint": {
+                "required": [
+                    "requestId",
+                    "status",
+                    "createdAt",
+                    "completedAt",
+                    "durationMs",
+                    "feature",
+                    "provider",
+                    "model",
+                    "errorCode",
+                    "endUserRef",
+                    "projectId",
+                    "environmentId",
+                    "profileRevisionId",
+                    "stream",
+                    "reservation",
+                    "attempts"
+                ],
+                "type": "object",
+                "properties": {
+                    "requestId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "status": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "completedAt": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "date-time"
+                    },
+                    "durationMs": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "feature": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "provider": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "model": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "errorCode": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "endUserRef": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "environmentId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "profileRevisionId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "stream": {
+                        "type": "boolean"
+                    },
+                    "reservation": {
+                        "$ref": "#/components/schemas/AnonymousTypeOfdecimalAndstring"
+                    },
+                    "attempts": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/AnonymousTypeOfintAndstringAndstringAndstringAndstringAndintAndintAndintAndstringAnddecimalAndstringAndGuidAndstringAndDateTimeAndDateTimeAndint"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstringAndDateTimeAndIEnumerableOfAnonymousTypeOfGuidAndintAndDateTimeAndProfileConfigAndIEnumerableOfAnonymousTypeOfGuidAndGuid": {
+                "required": [
+                    "id",
+                    "name",
+                    "createdAt",
+                    "revisions",
+                    "bindings"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "revisions": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/AnonymousTypeOfGuidAndintAndDateTimeAndProfileConfig"
+                        }
+                    },
+                    "bindings": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/AnonymousTypeOfGuidAndGuid"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstringAndListOfAnonymousTypeOfGuidAndstringAndstringAndstring": {
+                "required": [
+                    "userId",
+                    "email",
+                    "workspaces"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "workspaces": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/AnonymousTypeOfGuidAndstringAndstringAndstring"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstringAndstring": {
+                "required": [
+                    "userId",
+                    "email",
+                    "role"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "role": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfGuidAndstringAndstringAndstring": {
+                "required": [
+                    "id",
+                    "name",
+                    "plan",
+                    "role"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "plan": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "role": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfIEnumerableOfAnonymousTypeOfGuidAndDateTimeAndstringAndstringAndstringAndstringAndintAndstringAndGuidAndstringAndintAndintAndintAnddecimalAndstringAndstringAndAnonymousTypeOfintAndintAnddecimalAndintAndint": {
+                "required": [
+                    "items",
+                    "nextCursor",
+                    "summary"
+                ],
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/AnonymousTypeOfGuidAndDateTimeAndstringAndstringAndstringAndstringAndintAndstringAndGuidAndstringAndintAndintAndintAnddecimalAndstring"
+                        }
+                    },
+                    "nextCursor": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "summary": {
+                        "$ref": "#/components/schemas/AnonymousTypeOfintAndintAnddecimalAndintAndint"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfintAndintAnddecimalAndintAndint": {
+                "required": [
+                    "requests",
+                    "errors",
+                    "estimatedUsd",
+                    "unknownCostRequests",
+                    "p95LatencyMs"
+                ],
+                "type": "object",
+                "properties": {
+                    "requests": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "errors": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "estimatedUsd": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "unknownCostRequests": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "p95LatencyMs": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfintAndstringAndstringAndstringAndstringAndintAndintAndintAndstringAnddecimalAndstringAndGuidAndstringAndDateTimeAndDateTimeAndint": {
+                "required": [
+                    "attemptNumber",
+                    "provider",
+                    "model",
+                    "status",
+                    "providerRequestId",
+                    "inputTokens",
+                    "outputTokens",
+                    "cachedInputTokens",
+                    "usageState",
+                    "estimatedCost",
+                    "costState",
+                    "priceVersionId",
+                    "errorCode",
+                    "startedAt",
+                    "endedAt",
+                    "ttftMs"
+                ],
+                "type": "object",
+                "properties": {
+                    "attemptNumber": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "provider": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "model": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "status": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "providerRequestId": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "inputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "outputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "cachedInputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "usageState": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "estimatedCost": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "costState": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "priceVersionId": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "uuid"
+                    },
+                    "errorCode": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "startedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "endedAt": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "date-time"
+                    },
+                    "ttftMs": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfstring": {
+                "required": [
+                    "token"
+                ],
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfstringAndListOfLimitAndListOfBudgetBucketAndint": {
+                "required": [
+                    "period",
+                    "limits",
+                    "buckets",
+                    "reviewRequired"
+                ],
+                "type": "object",
+                "properties": {
+                    "period": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "limits": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/Limit"
+                        }
+                    },
+                    "buckets": {
+                        "type": [
+                            "null",
+                            "array"
+                        ],
+                        "items": {
+                            "$ref": "#/components/schemas/BudgetBucket"
+                        }
+                    },
+                    "reviewRequired": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "AnonymousTypeOfstringAndstringAndbooleanAndbooleanAndbooleanAndbooleanAndstringAndDateTimeAndboolean": {
+                "required": [
+                    "provider",
+                    "model",
+                    "text",
+                    "image",
+                    "streaming",
+                    "jsonSchema",
+                    "source",
+                    "verifiedAt",
+                    "priced"
+                ],
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "model": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "text": {
+                        "type": "boolean"
+                    },
+                    "image": {
+                        "type": "boolean"
+                    },
+                    "streaming": {
+                        "type": "boolean"
+                    },
+                    "jsonSchema": {
+                        "type": "boolean"
+                    },
+                    "source": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "verifiedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "priced": {
+                        "type": "boolean"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BindingBody": {
+                "required": [
+                    "revisionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "revisionId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "BudgetBucket": {
+                "required": [
+                    "scope",
+                    "scopeKey",
+                    "period"
+                ],
+                "type": "object",
+                "properties": {
+                    "workspaceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "scopeKey": {
+                        "type": "string"
+                    },
+                    "period": {
+                        "type": "string"
+                    },
+                    "reserved": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "settled": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "unknown": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "requests": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "tokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int64"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ConnectionBody": {
+                "required": [
+                    "provider",
+                    "name",
+                    "apiKey"
+                ],
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "apiKey": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ConnectionPatch": {
+                "required": [
+                    "name",
+                    "apiKey"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "apiKey": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GatewayEnvironment": {
+                "required": [
+                    "type"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "workspaceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "projectId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "KeyBody": {
+                "required": [
+                    "name",
+                    "expiresAt"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "expiresAt": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Limit": {
+                "required": [
+                    "scope",
+                    "scopeKey"
+                ],
+                "type": "object",
+                "properties": {
+                    "workspaceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "scopeKey": {
+                        "type": "string"
+                    },
+                    "monthlyUsd": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "monthlyRequests": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "monthlyTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int64"
+                    },
+                    "concurrency": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LimitBody": {
+                "required": [
+                    "scope",
+                    "scopeKey",
+                    "monthlyUsd",
+                    "monthlyRequests",
+                    "monthlyTokens",
+                    "concurrency"
+                ],
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "string"
+                    },
+                    "scopeKey": {
+                        "type": "string"
+                    },
+                    "monthlyUsd": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "monthlyRequests": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "monthlyTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int64"
+                    },
+                    "concurrency": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "LoginBody": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "MemberBody": {
+                "required": [
+                    "email",
+                    "role"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ModelRef": {
+                "required": [
+                    "provider",
+                    "model",
+                    "connectionId"
+                ],
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "connectionId": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "uuid"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "NameBody": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PriceBody": {
+                "required": [
+                    "provider",
+                    "model",
+                    "effectiveAt",
+                    "inputPerMillion",
+                    "outputPerMillion",
+                    "cachedInputPerMillion",
+                    "imageInputTokens",
+                    "source"
+                ],
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "effectiveAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "inputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "outputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "cachedInputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "imageInputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "source": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "PriceVersion": {
+                "required": [
+                    "provider",
+                    "model",
+                    "source"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "workspaceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "provider": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "effectiveAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "inputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "outputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "cachedInputPerMillion": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+                        "type": [
+                            "null",
+                            "number",
+                            "string"
+                        ],
+                        "format": "double"
+                    },
+                    "imageInputTokens": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "null",
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProfileConfig": {
+                "required": [
+                    "requiredCapabilities",
+                    "primary",
+                    "fallbacks"
+                ],
+                "type": "object",
+                "properties": {
+                    "requiredCapabilities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "primary": {
+                        "$ref": "#/components/schemas/ModelRef"
+                    },
+                    "fallbacks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ModelRef"
+                        }
+                    },
+                    "outputTokenLimit": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32",
+                        "default": 1024
+                    },
+                    "timeoutSeconds": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32",
+                        "default": 120
+                    },
+                    "schemaMode": {
+                        "type": "string",
+                        "default": "native"
+                    },
+                    "pricingRequiredForBudgetEnforcement": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "automaticRetryCount": {
+                        "pattern": "^-?(?:0|[1-9]\\d*)$",
+                        "type": [
+                            "integer",
+                            "string"
+                        ],
+                        "format": "int32",
+                        "default": 0
+                    }
+                },
+                "additionalProperties": false
+            },
+            "Project": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "workspaceId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "archivedAt": {
+                        "type": [
+                            "null",
+                            "string"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProjectPatch": {
+                "required": [
+                    "name",
+                    "archived"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "archived": {
+                        "type": [
+                            "null",
+                            "boolean"
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RegisterBody": {
+                "required": [
+                    "email",
+                    "password",
+                    "workspaceName"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "workspaceName": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RevisionBody": {
+                "required": [
+                    "config"
+                ],
+                "type": "object",
+                "properties": {
+                    "config": {
+                        "$ref": "#/components/schemas/ProfileConfig"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "RoleBody": {
+                "required": [
+                    "role"
+                ],
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "AiGateway.Api"
+        }
+    ]
+}

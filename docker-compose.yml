@@ -1,0 +1,56 @@
+# Local pilot stack. Copy .env.example to .env and replace every CHANGE_ME first.
+# Development profile (Demo provider visible with DEMO badge). Production boot: see README.
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes: [pgdata:/var/lib/postgresql]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 20
+
+  minio:
+    # Official minio/minio images are no longer published; Chainguard's free MinIO build is used. See OPERATIONS.md.
+    image: cgr.dev/chainguard/minio:latest
+    user: "0"
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes: [miniodata:/data]
+
+  migrate:
+    build: { context: ., dockerfile: src/AiGateway.Api/Dockerfile }
+    image: aigateway-api
+    command: ["--migrate"]
+    env_file: .env
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  api:
+    image: aigateway-api
+    env_file: .env
+    volumes: [keyring:/var/lib/aigateway/keyring]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      minio: { condition: service_started }
+    healthcheck:
+      test: ["CMD", "dotnet", "AiGateway.Api.dll", "--healthcheck"]
+      interval: 10s
+      retries: 12
+    ports: ["127.0.0.1:5080:8080"]
+
+  web:
+    build: { context: ., dockerfile: web/Dockerfile }
+    depends_on:
+      api: { condition: service_healthy }
+    ports: ["127.0.0.1:8080:8080"]
+
+volumes:
+  pgdata:
+  miniodata:
+  keyring:

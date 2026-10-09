@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/samples/" />
+  <Folder Name="/samples/dotnet/">
+    <Project Path="samples/dotnet/AiGateway.Sample.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AiGateway.Api/AiGateway.Api.csproj" />
+    <Project Path="src/AiGateway.Core/AiGateway.Core.csproj" />
+    <Project Path="src/AiGateway.Infrastructure/AiGateway.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AiGateway.Tests/AiGateway.Tests.csproj" />
+  </Folder>
+</Solution>
