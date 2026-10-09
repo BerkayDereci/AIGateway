@@ -3,6 +3,7 @@
 # Needs a running API in Development/Testing with Demo:Enabled=true. No real provider is called.
 # Usage: scripts/smoke.sh [baseUrl] [imageFile]
 set -euo pipefail
+cd "$(dirname "$0")/.."   # paths below are relative to the repo root
 BASE=${1:-http://localhost:5080}
 IMAGE=${2:-}
 JAR=$(mktemp); trap 'rm -f "$JAR"' EXIT
